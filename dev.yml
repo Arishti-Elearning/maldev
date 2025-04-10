@@ -1,0 +1,56 @@
+#cloud-config
+# Ensure the system waits for network connectivity before proceeding
+bootcmd:
+  - while ! ping -c 1 8.8.8.8; do sleep 1; echo "Waiting for network..." >> /var/log/cloud-init-debug.log; done
+
+# Define groups explicitly
+groups:
+  - developer
+
+# Configure the developer user
+users:
+  - name: developer
+    gecos: Developer User
+    primary_group: developer
+    groups: [sudo]  # Use list format for clarity
+    lock_passwd: false
+    passwd: $6$wpbQUw94OGm6bBl9$RQ2tiPm2fwfIqZ0lgrPTN4NhZeoTh8EYjr6S2pPu5jeY7dtI5715.megFvANhPNsaAnznl.7KDYYBpEK8lGkw0  # SHA-512 hash of "maldev@25"
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]  # List format for consistency
+
+# Update and upgrade packages
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true  # Reboot if upgrades require it
+
+# Install required packages
+packages:
+  - gcc
+  - g++
+  - gdb
+  - make
+  - cmake
+  - libboost-all-dev
+  - libssh-dev
+  - libpqxx-dev
+  - postgresql-server-dev-all  # More specific than postgresql-all
+  - libcryptopp-dev
+
+# Run commands after package installation
+runcmd:
+  - echo "Cloud-init started at $(date)" >> /var/log/cloud-init-debug.log
+  - apt-get update -y  # Ensure package index is fresh after boot
+  - systemctl enable postgresql  # Ensure PostgreSQL starts on boot
+  - systemctl start postgresql   # Start PostgreSQL immediately
+  - echo "Installed packages: $(dpkg -l | grep -E 'gcc|g\+\+|cmake|postgresql' | awk '{print $2}')" >> /var/log/cloud-init-debug.log
+  - echo "Cloud-init finished at $(date)" >> /var/log/cloud-init-debug.log
+
+# Write files for additional verification
+write_files:
+  - path: /var/log/cloud-init-debug.log
+    content: "Cloud-init log initialized at $(date)\n"
+    permissions: "0644"
+    owner: "root:root"
+
+# Final message for confirmation
+final_message: "System fully provisioned after $UPTIME seconds"
