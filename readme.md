@@ -24,6 +24,8 @@ On Linux/macOS:
 ```bash
 
 curl -sL https://github.com/digitalocean/doctl/releases/download/v1.104.0/doctl-1.104.0-linux-amd64.tar.gz | tar -xzv
+```
+```
 sudo mv doctl /usr/local/bin/
 ```
 
@@ -173,4 +175,6 @@ For any other quries, reach out to our discord server.
 - Suggestions & improvements are welcome 
 - Keep Learning.
 
-> Love - Arishti Security Elearning Team.
+> ~~~ 
+> ❤️ Love - Arishti Security Elearning Team.
+> ~~~~
