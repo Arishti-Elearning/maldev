@@ -2,11 +2,16 @@
 This guide walks you through setting up a development VM on DigitalOcean using doctl and a cloud-init configuration file (dev.yml).
 
 # Prerequisites
+
+
 ## Install Cloud-Init
 Ensure cloud-init is available on your base image (pre-installed on Ubuntu 22.04).
-Install `doctl`
 
-Install the DigitalOcean CLI:
+
+# Install `doctl` - Ditial Ocean CLI
+
+**Use this link to join Digital Ocean** this will add some credit to our account as affliacte referal.
+[![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg)](https://www.digitalocean.com/?refcode=6ff08d124386&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
 On Linux/macOS:
 
@@ -16,14 +21,13 @@ curl -sL https://github.com/digitalocean/doctl/releases/download/v1.104.0/doctl-
 sudo mv doctl /usr/local/bin/
 ```
 
-Verify: `doctl version`
+## Verify: `doctl version`
 
 ## Authenticate doctl
 
 Authenticate with your DigitalOcean account:
 
 ```bash
-
 doctl auth init
 ```
 Follow the prompts to enter your API token.
