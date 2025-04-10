@@ -34,8 +34,7 @@ packages:
   - libssh-dev
   - libpqxx-dev
   - postgresql-server-dev-all  # More specific than postgresql-all
-  - libcryptopp-dev
-
+  - libcrypto++-dev
 # Run commands after package installation
 runcmd:
   - echo "Cloud-init started at $(date)" >> /var/log/cloud-init-debug.log
