@@ -4,6 +4,12 @@ This guide walks you through setting up a development VM on DigitalOcean using d
 # Prerequisites
 
 
+# Run it locally 
+
+```bash
+multipass launch noble --name malware-lab --cpus 4 --disk 40G --memory 16G --cloud-init ./dev.yml
+```
+
 ## Install Cloud-Init
 Ensure cloud-init is available on your base image (pre-installed on Ubuntu 22.04).
 
