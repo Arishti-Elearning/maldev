@@ -37,11 +37,12 @@ Create a droplet named devmachine with the following command:
 doctl compute droplet create devmachine \
   --region nyc3 \
   --size s-1vcpu-1gb \
-  --image ubuntu-22-04-x64 \
+  --image ubuntu-24-04-x64 \
   --user-data-file dev.yml \
   --wait
 ```
 > --wait ensures the command completes once the droplet is active.
+> Increase the CPU & RAM Size ref ([Digital Ocean Doc](https://docs.digitalocean.com/reference/doctl/reference/compute/droplet/create/))
 
 
 # List the VM
