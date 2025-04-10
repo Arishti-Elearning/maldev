@@ -41,8 +41,9 @@ doctl compute droplet create devmachine \
   --user-data-file dev.yml \
   --wait
 ```
-> --wait ensures the command completes once the droplet is active.
-> Increase the CPU & RAM Size ref ([Digital Ocean Doc](https://docs.digitalocean.com/reference/doctl/reference/compute/droplet/create/))
+- `--wait` ensures the command completes once the droplet is active.
+- Increase the CPU & RAM Size ref ([Digital Ocean Doc](https://docs.digitalocean.com/reference/doctl/reference/compute/droplet/create/))
+- You can also change the `region`
 
 
 # List the VM
