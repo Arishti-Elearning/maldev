@@ -4,13 +4,21 @@ This guide walks you through setting up a development VM on DigitalOcean using d
 # Prerequisites
 
 
-# Run it locally 
+# Run it locally usign multipass
 
 ```bash
 multipass launch noble --name malware-lab --cpus 4 --disk 40G --memory 16G --cloud-init ./dev.yml
 ```
 
-## Install Cloud-Init
+# Run it locally inside VM 
+~~~
+Install Ubuntu 24.04 LTS, then run the following command:
+~~~
+```bash
+sudo apt install gcc g++ gdb make cmake libboost-all-dev libssh-dev libpqxx-dev postgresql-server-dev-all libcrypto++-dev
+```
+
+## Install Cloud-Init 
 Ensure cloud-init is available on your base image (pre-installed on Ubuntu 22.04).
 
 
@@ -19,17 +27,26 @@ Ensure cloud-init is available on your base image (pre-installed on Ubuntu 22.04
 **Use this link to join Digital Ocean** this will add some credit to our account as affliacte referal.
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg)](https://www.digitalocean.com/?refcode=6ff08d124386&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
-On Linux/macOS:
+**On Linux/macOS:**
 
 ```bash
-
 curl -sL https://github.com/digitalocean/doctl/releases/download/v1.104.0/doctl-1.104.0-linux-amd64.tar.gz | tar -xzv
 ```
+
 ```
 sudo mv doctl /usr/local/bin/
 ```
 
-## Verify: `doctl version`
+**on windws**
+
+Follow the [Installation Guide](https://github.com/digitalocean/doctl?tab=readme-ov-file#installing-doctl)
+
+
+## Verify: 
+
+```bash
+doctl version
+```
 
 ## Authenticate doctl
 
@@ -74,7 +91,6 @@ doctl compute droplet list
 Log in as the developer user:
 
 ```bash
-
 ssh developer@{IP}
 ```
 - Password: maldev@25
@@ -84,7 +100,6 @@ ssh developer@{IP}
 When done, delete the droplet:
 
 ```bash
-
 doctl compute droplet delete --force devmachine
 ```
 - --force skips confirmation.
@@ -100,7 +115,6 @@ Manual Checks
 After SSHing into the VM, verify key packages:
 
 ```bash
-
 dpkg -l | grep gcc
 dpkg -l | grep g++
 dpkg -l | grep cmake
@@ -112,7 +126,6 @@ dpkg -l | grep postgresql
 Run this script to verify all packages:
 
 ```bash
-
 #!/bin/bash
 for pkg in gcc g++ gdb make cmake libboost-all-dev libssh-dev libpqxx-dev postgresql-server-dev-all libcryptopp-dev; do
   if dpkg -l | grep -q "^ii  $pkg "; then
@@ -162,7 +175,6 @@ sudo cat /var/log/cloud-init-output.log
 - Manual Fix: Install missing packages:
 
 ```bash
-
 sudo apt-get update
 sudo apt-get install -y <missing-package>
 ```
